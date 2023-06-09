@@ -9,18 +9,19 @@ public class MaquinaDeEstados : MonoBehaviour  {
     public MonoBehaviour EstadoPersecucion;
     public MonoBehaviour EstadoInicial;
 
-    private MonoBehaviour EstadoActual;
+    private MonoBehaviour estadoActual;
 
 
-    void Start() {
+    public void Start() {
         ActivarEstado(EstadoInicial);
     }
-    public void ActivarEstado(MonoBehaviour NuevoEstado)
+
+    public void ActivarEstado(MonoBehaviour nuevoEstado)
     {
 
-      if (EstadoActual!=null) EstadoActual.enabled = false;
-         EstadoActual = NuevoEstado;
-         EstadoActual.enabled = true;
+      if (estadoActual!=null) estadoActual.enabled = false;
+         estadoActual = nuevoEstado;
+         estadoActual.enabled = true;
 
     }
 
