@@ -345,12 +345,15 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/CambioVelocidad.cs"
 "Assets/Scripts/ControladorVision.cs"
 "Assets/Scripts/EstadoAlerta.cs"
 "Assets/Scripts/EstadoPatrulla.cs"
 "Assets/Scripts/EstadoPersecucion.cs"
 "Assets/Scripts/MaquinaDeEstados.cs"
 "Assets/Scripts/NavMesh.cs"
+"Assets/Scripts/ObtacleController.cs"
+"Assets/Scripts/PlayerController.cs"
 -langversion:9.0
 
 /deterministic

@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class EstadoAlerta : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float velocitySearch = 120f;
+    public float durationSearch = 4f;
+
+    private MaquinaDeEstados maquinaDeEstados; 
+    private NavMesh navMesh;
+    private ControladorVision controladorVision;
+    private float timeSearching;
+
+    void Awake()
     {
-        
+        maquinaDeEstados = GetComponent<MaquinaDeEstados>();
+        navMesh = GetComponent<NavMesh>();
+        controladorVision = GetComponent<ControladorVision>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
+        navMesh.StopNavMeshAgent();
+        timeSearching = 0;   //estado alerta
+    }
+
+    void Update()
+    {     
         
+      RaycastHit hit;
+       if (controladorVision.CanSeePlayer(out hit)) 
+       {
+          navMesh.perseguirObjetivo = hit.transform;
+          maquinaDeEstados.ActivarEstado(maquinaDeEstados.EstadoPersecucion);
+          return; //-> genera que el estado patrulla no se ejecute cuanto este activo el estado persecucion
+       }
+        
+      //vel en x, z, y
+        transform.Rotate(0f, velocitySearch * Time.deltaTime, 0f);
+        timeSearching += Time.deltaTime;
+
+        if(timeSearching >= durationSearch)
+        {
+          maquinaDeEstados.ActivarEstado(maquinaDeEstados.EstadoPatrulla);
+          return; //evitar problema por si se quiere agregar mas codigo debajo, que no se ejecute
+        }
+
     }
 }
