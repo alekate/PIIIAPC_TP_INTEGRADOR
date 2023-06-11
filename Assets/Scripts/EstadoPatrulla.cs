@@ -3,57 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EstadoPatrulla : MonoBehaviour {
- //cargar variable
-  public Transform[] WayPoints;
 
-  private MaquinaDeEstados maquinaDeEstados;
-  private NavMesh navMesh;
-  private ControladorVision controladorVision;
-  private int nextWayPoint;
+    public Transform[] WayPoints;
 
-  void Awake()
-  {
-    maquinaDeEstados = GetComponent<MaquinaDeEstados>();
-    navMesh = GetComponent<NavMesh>();
-    controladorVision = GetComponent<ControladorVision>();
-  }
+    private NavMesh navMesh;
 
-  void Update()
-  {
-    //puede ver al jugador?
-    RaycastHit hit;
-    if (controladorVision.CanSeePlayer(out hit)) 
+    private int nextWayPoint;
+
+    void Awake()
     {
-      navMesh.perseguirObjetivo = hit.transform;
-      maquinaDeEstados.ActivarEstado(maquinaDeEstados.EstadoPersecucion);
-      return; //-> genera que el estado patrulla no se ejecute cuanto este activo el estado persecucion
+        navMesh = GetComponent<NavMesh>();
     }
 
-    if (navMesh.HaLlegado())
-    {
-      nextWayPoint = (nextWayPoint + 1) % WayPoints.Length;
-      actualizarWayPoint();
+    void Update() {
+       if (navMesh.HaLlegado())
+       {
+         nextWayPoint = (nextWayPoint + 1) % WayPoints.Length;
+         ActualizarWaypointDestino();
+       }
     }
 
-  }
      
-  void OnEnable()
-  {
-    actualizarWayPoint();
-  }
-
-  void actualizarWayPoint()
-  {
-    navMesh.ActualizarWaypointNavMeshAgent(WayPoints[nextWayPoint].position);
-  }
-
-  //se sabra que el jugador ha entrado en el area del enemigo
-  public void OnTriggerEnter(Collider other)
-  {
-   if (other.gameObject.CompareTag("Player") && enabled)
+    void OnEnable()
     {
-      maquinaDeEstados.ActivarEstado(maquinaDeEstados.EstadoAlerta);
+        ActualizarWaypointDestino();
     }
-  }
+
+    void ActualizarWaypointDestino()
+    {
+       navMesh.ActualizarWaypointNavMeshAgent(WayPoints[nextWayPoint].position);
+    }
 
 }
