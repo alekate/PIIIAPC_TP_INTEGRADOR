@@ -9,7 +9,6 @@ public class NavMesh : MonoBehaviour
 
   private NavMeshAgent navMeshAgent;
 
-
   void Start ()
   {
    navMeshAgent = GetComponent<NavMeshAgent>();

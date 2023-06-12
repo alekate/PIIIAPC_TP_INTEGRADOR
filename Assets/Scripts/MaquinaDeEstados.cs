@@ -12,6 +12,7 @@ public class MaquinaDeEstados : MonoBehaviour  {
   public MonoBehaviour CambioVelocidad;
   private NavMeshAgent _agent;
   private MonoBehaviour estadoActual;
+  
 
   public void Start() {
     ActivarEstado(EstadoInicial);
