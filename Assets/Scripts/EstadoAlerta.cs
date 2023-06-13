@@ -22,7 +22,7 @@ public class EstadoAlerta : MonoBehaviour
     private void OnEnable()
     {
         navMesh.StopNavMeshAgent();
-        timeSearching = 0;   //estado alerta
+        timeSearching = 4;   //estado alerta
     }
 
     void Update()
@@ -38,11 +38,12 @@ public class EstadoAlerta : MonoBehaviour
         
       //vel en x, z, y
         transform.Rotate(0f, velocitySearch * Time.deltaTime, 0f);
-        timeSearching += Time.deltaTime;
+        timeSearching -= Time.deltaTime;
 
-        if(timeSearching >= durationSearch)
+        if(timeSearching <= 0)
         {
           maquinaDeEstados.ActivarEstado(maquinaDeEstados.EstadoPatrulla);
+          timeSearching = durationSearch;
           return; //evitar problema por si se quiere agregar mas codigo debajo, que no se ejecute
         }
 
