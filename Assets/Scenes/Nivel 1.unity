@@ -878,6 +878,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6763676502206204335, guid: 63a42919091612347b7016047aa2ca6d, type: 3}
+      propertyPath: velMaxima
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6763676502206204498, guid: 63a42919091612347b7016047aa2ca6d, type: 3}
       propertyPath: WayPoints.Array.data[0]
       value: 
