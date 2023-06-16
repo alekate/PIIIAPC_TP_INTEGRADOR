@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CountdownTimer : MonoBehaviour
 {
     float currentTime = 0f;
-    float startingTime = 10f;
+    float startingTime = 200f;
 
     [SerializeField] Text countdownText;
     
@@ -22,7 +22,7 @@ public class CountdownTimer : MonoBehaviour
         countdownText.text = currentTime.ToString ("0"); //actualiza el numero dentro del componente y el "0" numeros enteros
 
         if(currentTime <= 0) { //Evita mostrar los numeros negativos
-            currentTime = 0;
+            Application.LoadLevel("Nivel 2");
         }
     }
 }

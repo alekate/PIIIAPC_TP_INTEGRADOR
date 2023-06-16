@@ -5,22 +5,19 @@ using UnityEngine.AI;
 
 public class NavMesh : MonoBehaviour
 {
- [HideInInspector] public Transform perseguirObjetivo;
 
+ 
+  [HideInInspector] 
+  public Transform perseguirObjetivo;
+  
   private NavMeshAgent navMeshAgent;
 
 
-  void Start ()
+  void Awake ()
   {
    navMeshAgent = GetComponent<NavMeshAgent>();
   }
- //metodo que actualiza el waypoint del agente
- //punto concreto donde debe ir el agente
-  public void ActualizarWaypointNavMeshAgent(Vector3 wayPoint)
-  {
-   navMeshAgent.destination = wayPoint; //punto de destino
-   navMeshAgent.isStopped = false;
-  }
+
 
   // metodo que se utiliza para la persecucion del enemigo hacia el jugador
   public void ActualizarWaypointNavMeshAgent()
@@ -28,10 +25,18 @@ public class NavMesh : MonoBehaviour
    ActualizarWaypointNavMeshAgent(perseguirObjetivo.position); 
   }
 
+ //metodo que actualiza el waypoint del agente
+ //punto concreto donde debe ir el agente
+  public void ActualizarWaypointNavMeshAgent(Vector3 wayPoint)
+  {
+   navMeshAgent.destination = wayPoint; //punto de destino
+   navMeshAgent.Resume();
+  }
+
   // para que el enemigo se detenga su estado de patrulla, ya sea para los waypoints o para el jugador
   public void StopNavMeshAgent()
   {
-   navMeshAgent.isStopped = true;
+   navMeshAgent.Stop();
   }
 
   //funcion que se genera para saber si el enemigo llega o no al waypoint
